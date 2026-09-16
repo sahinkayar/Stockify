@@ -1,5 +1,4 @@
-import React from "react";
-import logo from "./logo.png";
+import stockifylogo from "./stockify.png";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../Context/UseAuth";
 
@@ -11,7 +10,11 @@ function Navbar() {
         <div className="flex items-center space-x-20">
           <Link to={"/"}>
             {" "}
-            <img src={logo} alt="" />
+            <img
+              src={stockifylogo}
+              alt=""
+              className="w-50 h-auto object-contain mix-blend-multiply dark:mix-blend-screen bg-transparent pointer-events-none"
+            />
           </Link>
 
           <div className="hidden font-bold lg:flex">

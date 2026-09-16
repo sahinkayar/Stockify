@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { getCashflowStatement } from "../../api";
 import type { CompanyCashFlow } from "../../company";

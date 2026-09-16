@@ -1,5 +1,4 @@
-import React from "react";
-import stockify from "./stockifylogo.jpeg";
+import hero from "./hero.png";
 import { Link } from "react-router-dom";
 
 function Hero() {
@@ -24,7 +23,7 @@ function Hero() {
           </div>
         </div>
         <div className="mb-24 mx-auto md:w-180 md:px-10 lg:mb-0 lg:w-1/2">
-          <img src={stockify} alt="" />
+          <img src={hero} alt="" />
         </div>
       </div>
     </section>
