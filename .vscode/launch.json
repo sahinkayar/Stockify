@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": ".NET 9 Web API Launch",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+"program": "${workspaceFolder}/api/bin/Debug/net9.0/api.dll",
+    "args": [
+        "build",
+        "${workspaceFolder}/api/api.csproj",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+"cwd": "${workspaceFolder}/api",    
+  "stopAtEntry": false,
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  ]
+}
