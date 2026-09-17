@@ -1,11 +1,14 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-COPY *.csproj ./
-RUN dotnet restore
+COPY api/*.csproj ./api/
+RUN dotnet restore ./api/*.csproj
 
-COPY . ./
+
+COPY api/ ./api/
+WORKDIR /src/api
 RUN dotnet publish -c Release -o /app/publish
+
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
@@ -14,4 +17,4 @@ COPY --from=build /app/publish .
 ENV ASPNETCORE_URLS=http://+:10000
 EXPOSE 10000
 
-ENTRYPOINT ["dotnet", "Stockify.dll"]
+ENTRYPOINT ["dotnet", "api.dll"]
