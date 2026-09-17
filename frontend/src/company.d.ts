@@ -61,7 +61,10 @@ export interface CompanyIncomeStatement {
   incomeBeforeTax: number;
   netIncome: number;
   eps: number;
- 
+ grossProfit:number;
+ epsDiluted:number;
+ operatingIncomeRatio:number;
+ incomeBeforeTaxRatio:number;
 }
 
 export interface CompanyBalanceSheet {
