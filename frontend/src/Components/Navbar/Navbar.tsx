@@ -5,7 +5,7 @@ import { useAuth } from "../../Context/UseAuth";
 function Navbar() {
   const { isLoggedIn, user, logout } = useAuth();
   return (
-    <nav className="relative container mx-auto p-6">
+    <nav className="relative container mx-auto p-6 ">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-20">
           <Link to={"/"}>
