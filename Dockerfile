@@ -1,21 +1,21 @@
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
-# Sadece api klasörünün içine odaklan
+
 COPY api/ ./api/
 WORKDIR /src/api
 
-# Restore ve Publish işlemlerini doğrudan api klasörü içinden çalıştır
+
 RUN dotnet restore
 RUN dotnet publish -c Release -o /app/publish
 
-# Runtime aşaması
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS final
 WORKDIR /app
 COPY --from=build /app/publish .
 
 ENV ASPNETCORE_URLS=http://+:10000
 EXPOSE 10000
 
-# Eğer projendeki .csproj adı farklıysa (örn: Stockify.csproj) aşağıya "Stockify.dll" yaz
+
 ENTRYPOINT ["dotnet", "api.dll"]
