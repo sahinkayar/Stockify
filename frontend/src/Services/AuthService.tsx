@@ -2,7 +2,7 @@ import axios from "axios";
 import { handleError } from "../Helpers/ErrorHandler";
 import type { UserProfileToken } from "../Models/User";
 
-const api = import.meta.env.VITE_API_URL;
+const api = "https://stockify-1-7f09.onrender.com/api";
 
 export const LoginAPI = async (username: string, password: string) => {
   try {
