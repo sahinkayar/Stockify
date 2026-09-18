@@ -15,6 +15,10 @@ import {
   mockIncomeStatement,
 } from "./Mocks/Mock";
 
+export const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
+});
+
 export const searchCompanies = async (query: string) => {
   try {
     const response = await axios.get<CompanySearch[]>(
