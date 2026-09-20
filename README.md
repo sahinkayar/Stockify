@@ -31,6 +31,7 @@ The project combines a robust and secure backend architecture with a modern, res
 * ⚡ **Advanced Filtering:** Fast and responsive search and filter mechanisms for stock assets.
 
 ---
+https://stockifydemo.netlify.app/
 
 ## 🔧 Installation & Setup
 
@@ -40,3 +41,5 @@ Follow these steps to run the project locally on your machine.
 ```bash
 git clone [https://github.com/sahinkayar/Stockify.git](https://github.com/sahinkayar/Stockify.git)
 cd Stockify
+
+
