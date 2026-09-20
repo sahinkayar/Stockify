@@ -96,6 +96,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<StockDBContext>();
+    dbContext.Database.Migrate();
+}
 
 app.UseHttpsRedirection();
 app.UseCors(x => x.AllowCredentials().AllowAnyMethod().AllowAnyHeader().SetIsOriginAllowed(origin => true));

@@ -9,12 +9,12 @@ namespace api.Dtos.Stock.Account
     public class RegisterDto
     {
         [Required]
-        public string? UserName { get; set; }
+        public required string UserName { get; set; }
 
         [Required]
         [EmailAddress]
-        public string? Email { get; set; }
+        public required string Email { get; set; }
         [Required]
-        public string? Password { get; set; }
+        public required string Password { get; set; }
     }
 }
