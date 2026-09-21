@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { LoginAPI, registerAPI } from "../Services/AuthService";
 import { toast } from "react-toastify";
 import axios from "axios";
+import Spinner from "../Components/Spinner/Spinner";
 
 type userContextType = {
   user: userProfile | null;
@@ -13,6 +14,7 @@ type userContextType = {
   loginUser: (username: string, password: string) => void;
   logout: () => void;
   isLoggedIn: () => boolean;
+  isLoggingOut: boolean;
 };
 
 type Props = { children: React.ReactNode };
@@ -24,6 +26,7 @@ export const UserProvider = ({ children }: Props) => {
   const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<userProfile | null>(null);
   const [isReady, setIsReady] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   useEffect(() => {
     const user = localStorage.getItem("user");
@@ -61,16 +64,16 @@ export const UserProvider = ({ children }: Props) => {
 
   const loginUser = async (userName: string, password: string) => {
     await LoginAPI(userName, password)
-      .then((res) => {
-        if (res) {
-          localStorage.setItem("token", res.data.token);
+      .then((response) => {
+        if (response) {
           const userObj = {
-            userName: res.data.userName,
-            email: res.data.email,
+            userName: response?.data.userName,
+            email: response?.data.email,
           };
           localStorage.setItem("user", JSON.stringify(userObj));
-          setToken(res?.data.token!);
-          setUser(userObj!);
+          localStorage.setItem("token", response.data.token);
+          setUser(userObj);
+          setToken(response.data.token);
           toast.success("login succes");
           navigate("/search");
         }
@@ -82,16 +85,37 @@ export const UserProvider = ({ children }: Props) => {
   };
 
   const logout = () => {
+    setIsLoggingOut(true);
+
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-    setUser(null);
-    setToken("");
-    navigate("/");
+
+    setTimeout(() => {
+      setUser(null);
+      setToken("");
+      setIsLoggingOut(false);
+
+      navigate("/");
+    }, 2000);
   };
   return (
     <UserContext.Provider
-      value={{ loginUser, user, token, logout, isLoggedIn, registeredUser }}
+      value={{
+        loginUser,
+        user,
+        token,
+        logout,
+        isLoggedIn,
+        registeredUser,
+        isLoggingOut,
+      }}
     >
+      {isLoggingOut && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/70 backdrop-blur-sm">
+          <Spinner />
+        </div>
+      )}
+
       {isReady ? children : null}
     </UserContext.Provider>
   );

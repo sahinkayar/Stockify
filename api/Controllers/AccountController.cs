@@ -36,14 +36,15 @@ namespace api.Controllers
             {
                 return BadRequest(ModelState);
             }
+
             var user = await _userManager.FindByNameAsync(loginDto.UserName);
-            if (user == null) return Unauthorized("Invalid userName!");
+            if (user == null) return Unauthorized("invalid username");
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
             if (!result.Succeeded) return Unauthorized("Invalid userName or password!");
             return Ok(new NewUserDto
             {
-                UserName = user.UserName,
-                Email = user.Email,
+                UserName = user.UserName!,
+                Email = user.Email!,
                 Token = _tokenService.CreateToken(user)
             });
         }

@@ -1,6 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../Context/UseAuth";
 import { Link } from "react-router-dom";

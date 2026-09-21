@@ -1,9 +1,11 @@
 import stockifylogo from "./stockify.png";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../Context/UseAuth";
+import { useEffect, useState } from "react";
 
 function Navbar() {
   const { isLoggedIn, user, logout } = useAuth();
+
   return (
     <nav className="relative container mx-auto p-6 ">
       <div className="flex items-center justify-between">
