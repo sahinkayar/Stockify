@@ -57,7 +57,6 @@ function SearchPage() {
       <CardList
         searchResult={searchResult}
         onPortfolioCreate={onPortfolioCreate}
-        search={search}
       />
     </div>
   );

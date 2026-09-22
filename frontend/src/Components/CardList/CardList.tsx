@@ -4,14 +4,9 @@ import type { CompanySearch } from "../../company";
 interface props {
   searchResult: CompanySearch[];
   onPortfolioCreate: (e: SyntheticEvent) => void;
-  search: string;
 }
 
-const CardList = ({ searchResult, onPortfolioCreate, search }: props) => {
-  if (searchResult[0]) {
-    console.log(searchResult[0].exchange);
-  }
-
+const CardList = ({ searchResult, onPortfolioCreate }: props) => {
   return (
     <div>
       {" "}

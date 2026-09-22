@@ -90,8 +90,6 @@ function CompanyProfile() {
       try {
         const value = await getCompanyMetrics(ticker?.toUpperCase());
         if (value && value.length > 0) {
-          console.log(value[0]);
-
           setCompanyData(value[0]);
         }
       } catch (error) {

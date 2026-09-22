@@ -84,8 +84,6 @@ function BalanceSheet() {
       try {
         const response = await getBalanceSheet(ticker);
         if (response && response.length > 0) {
-          console.log(response[0]);
-
           setBalanceSheetData(response[0]);
         }
       } catch (error) {

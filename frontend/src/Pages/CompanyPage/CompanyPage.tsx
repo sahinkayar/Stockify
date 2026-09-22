@@ -14,7 +14,6 @@ function CompanyPage() {
 
   useEffect(() => {
     const getProfileInit = async () => {
-      console.log("Fetching company profile for ticker:", ticker);
       try {
         const result = await getCompanyProfile(ticker!, searchData);
 
@@ -27,7 +26,6 @@ function CompanyPage() {
         console.error("Api profile errror:", error.message);
       }
     };
-    console.log(ticker);
 
     getProfileInit();
   }, [ticker]);

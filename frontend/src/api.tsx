@@ -25,7 +25,6 @@ export const searchCompanies = async (query: string) => {
     if (axios.isAxiosError(error)) {
       return "error message: " + error.message;
     } else {
-      console.log("unexpected error", error);
       return " An unexpected error has occured";
     }
   }
@@ -39,7 +38,7 @@ export const getCompanyProfile = async (
     const response = await axios.get<CompanyProfile[]>(
       `https://financialmodelingprep.com/stable/profile?symbol=${query}&apikey=${import.meta.env.VITE_API_KEY}`,
     );
-    console.log(response.data);
+
     if (response.data && response.data.length > 0) {
       return response.data;
     }
@@ -57,7 +56,6 @@ export const getCompanyMetrics = async (
       `https://financialmodelingprep.com/stable/key-metrics-ttm?symbol=${query}&apikey=${import.meta.env.VITE_API_KEY}`,
     );
 
-    console.log(response.data);
     return response.data;
   } catch (error) {}
   return [getMockCompanyMetrics()];
@@ -70,7 +68,7 @@ export const getIncomeStatement = async (
     const response = await axios.get<CompanyIncomeStatement[]>(
       `https://financialmodelingprep.com/stable/income-statement?symbol=${query}&apikey=${import.meta.env.VITE_API_KEY}`,
     );
-    console.log(response);
+
     return response.data;
   } catch (error) {}
   return mockIncomeStatement();
@@ -83,7 +81,7 @@ export const getBalanceSheet = async (
     const response = await axios.get<CompanyBalanceSheet[]>(
       `https://financialmodelingprep.com/stable/balance-sheet-statement?symbol=${query}&apikey=${import.meta.env.VITE_API_KEY}`,
     );
-    console.log(response);
+
     return response.data;
   } catch (error) {}
   return mockBalanceSheet();
@@ -97,7 +95,6 @@ export const getCashflowStatement = async (
       `https://financialmodelingprep.com/stable/cash-flow-statement?symbol=${query}&apikey=${import.meta.env.VITE_API_KEY}`,
     );
 
-    console.log(response.data);
     return response.data;
   } catch (error) {}
   return mockCashFlowStatement();

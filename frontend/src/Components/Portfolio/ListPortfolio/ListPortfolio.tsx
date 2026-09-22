@@ -15,7 +15,6 @@ function ListPortfolio({ portfolioValues, onPortfolioDelete }: Props) {
         <>
           {portfolioValues.length > 0 ? (
             portfolioValues.map((portfolioValue) => {
-              console.log(portfolioValue);
               return (
                 <CardPortfolio
                   portfolioValue={portfolioValue}

@@ -59,7 +59,6 @@ function CashflowStatement() {
         const result = await getCashflowStatement(ticker.toUpperCase());
 
         if (result && result.length > 0) {
-          console.log(result);
           setCashflowStatement(result);
         }
       } catch (error) {

@@ -75,7 +75,6 @@ export const UserProvider = ({ children }: Props) => {
       setIsLoading(true);
       const response = await LoginAPI(userName, password);
       if (response) {
-        console.log(isLoading);
         const userObj = {
           userName: response?.data.userName,
           email: response?.data.email,
