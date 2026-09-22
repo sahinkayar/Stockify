@@ -1,5 +1,8 @@
 # 📈 Stockify
 
+# Live WebSite Demo
+https://stockifydemo.netlify.app/
+
 **Stockify** is a full-stack web application designed for users to track inventory, manage stock portfolios, and perform financial analytics seamlessly. 
 
 The project combines a robust and secure backend architecture with a modern, responsive frontend interface.
@@ -31,7 +34,7 @@ The project combines a robust and secure backend architecture with a modern, res
 * ⚡ **Advanced Filtering:** Fast and responsive search and filter mechanisms for stock assets.
 
 ---
-https://stockifydemo.netlify.app/
+
 
 ## 🔧 Installation & Setup
 
