@@ -12,7 +12,7 @@ export const handleError = (error: any) => {
         toast.warning(err.data.description[e][0]);
       }
     } else if (err?.data) {
-      console.log(error);
+      console.log(error.response);
 
       toast.warning(err.data);
     } else if (err?.status === 401) {

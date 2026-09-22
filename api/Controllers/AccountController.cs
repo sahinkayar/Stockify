@@ -40,7 +40,7 @@ namespace api.Controllers
             var user = await _userManager.FindByNameAsync(loginDto.UserName);
             if (user == null) return Unauthorized("invalid username");
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
-            if (!result.Succeeded) return Unauthorized("Invalid userName or password!");
+            if (!result.Succeeded) return Unauthorized("Invalid username or password!");
             return Ok(new NewUserDto
             {
                 UserName = user.UserName!,

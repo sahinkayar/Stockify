@@ -15,6 +15,7 @@ type userContextType = {
   logout: () => void;
   isLoggedIn: () => boolean;
   isLoggingOut: boolean;
+  isLoading: boolean;
 };
 
 type Props = { children: React.ReactNode };
@@ -27,7 +28,7 @@ export const UserProvider = ({ children }: Props) => {
   const [user, setUser] = useState<userProfile | null>(null);
   const [isReady, setIsReady] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const user = localStorage.getItem("user");
     const token = localStorage.getItem("token");
@@ -47,6 +48,7 @@ export const UserProvider = ({ children }: Props) => {
     await registerAPI(userName, password, email)
       .then((res) => {
         if (res) {
+          setIsLoading(true);
           localStorage.setItem("token", res.data.token);
           const userObj = {
             userName: res.data.userName,
@@ -55,6 +57,7 @@ export const UserProvider = ({ children }: Props) => {
           localStorage.setItem("user", JSON.stringify(userObj));
           setToken(res?.data.token!);
           setUser(userObj!);
+          setIsLoading(false);
           toast.success("login succes");
           navigate("/search");
         }
@@ -66,6 +69,7 @@ export const UserProvider = ({ children }: Props) => {
     await LoginAPI(userName, password)
       .then((response) => {
         if (response) {
+          setIsLoading(true);
           const userObj = {
             userName: response?.data.userName,
             email: response?.data.email,
@@ -74,6 +78,7 @@ export const UserProvider = ({ children }: Props) => {
           localStorage.setItem("token", response.data.token);
           setUser(userObj);
           setToken(response.data.token);
+          setIsLoading(false);
           toast.success("login succes");
           navigate("/search");
         }
@@ -96,7 +101,7 @@ export const UserProvider = ({ children }: Props) => {
       setIsLoggingOut(false);
 
       navigate("/");
-    }, 2000);
+    }, 1200);
   };
   return (
     <UserContext.Provider
@@ -108,6 +113,7 @@ export const UserProvider = ({ children }: Props) => {
         isLoggedIn,
         registeredUser,
         isLoggingOut,
+        isLoading,
       }}
     >
       {isLoggingOut && (

@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../Context/UseAuth";
 import { Link } from "react-router-dom";
+import Spinner from "../../Components/Spinner/Spinner";
 
 type RegisterInfo = {
   userName: string;
@@ -16,7 +17,7 @@ const validation = Yup.object().shape({
 });
 
 function RegisterPage() {
-  const { registeredUser } = useAuth();
+  const { registeredUser, isLoading } = useAuth();
   const {
     handleSubmit,
     formState: { errors },
@@ -24,7 +25,7 @@ function RegisterPage() {
   } = useForm<RegisterInfo>({ resolver: yupResolver(validation) });
 
   const handleRegister = (props: RegisterInfo) => {
-    return registeredUser(props.userName, props.password, props.email);
+    registeredUser(props.userName, props.password, props.email);
   };
   return (
     <div>
@@ -39,6 +40,7 @@ function RegisterPage() {
                 className="space-y-4 md:space-y-6"
                 onSubmit={handleSubmit(handleRegister)}
               >
+                {isLoading && <Spinner />}
                 <div>
                   <label
                     htmlFor="userName"

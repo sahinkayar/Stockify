@@ -4,6 +4,7 @@ import { useAuth } from "../../Context/UseAuth";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
+import Spinner from "../../Components/Spinner/Spinner";
 
 type LoginFormInputs = {
   userName: string;
@@ -15,7 +16,7 @@ const validation = Yup.object().shape({
 });
 
 function LoginPage() {
-  const { loginUser } = useAuth();
+  const { loginUser, isLoading } = useAuth();
   const {
     register,
     handleSubmit,
@@ -24,6 +25,7 @@ function LoginPage() {
 
   const handleLogin = (form: LoginFormInputs) => {
     loginUser(form.userName, form.password);
+    console.log(isLoading);
   };
   return (
     <div>
@@ -38,6 +40,7 @@ function LoginPage() {
                 className="space-y-4 md:space-y-6"
                 onSubmit={handleSubmit(handleLogin)}
               >
+                {isLoading && <Spinner />}
                 <div>
                   <label
                     htmlFor="userName"
