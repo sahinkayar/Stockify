@@ -45,45 +45,53 @@ export const UserProvider = ({ children }: Props) => {
     password: string,
     email: string,
   ) => {
-    await registerAPI(userName, password, email)
-      .then((res) => {
-        if (res) {
-          setIsLoading(true);
-          localStorage.setItem("token", res.data.token);
-          const userObj = {
-            userName: res.data.userName,
-            email: res.data.email,
-          };
-          localStorage.setItem("user", JSON.stringify(userObj));
-          setToken(res?.data.token!);
-          setUser(userObj!);
-          setIsLoading(false);
-          toast.success("login succes");
-          navigate("/search");
-        }
-      })
-      .catch((e) => toast.warning("Server error occured"));
+    try {
+      setIsLoading(true);
+      const res = await registerAPI(userName, password, email);
+
+      if (res) {
+        setIsLoading(true);
+        localStorage.setItem("token", res.data.token);
+        const userObj = {
+          userName: res.data.userName,
+          email: res.data.email,
+        };
+        localStorage.setItem("user", JSON.stringify(userObj));
+        setToken(res?.data.token!);
+        setUser(userObj!);
+        setIsLoading(false);
+        toast.success("login succes");
+        navigate("/search");
+      }
+    } catch {
+      toast.warning("Server error occured");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const loginUser = async (userName: string, password: string) => {
-    await LoginAPI(userName, password)
-      .then((response) => {
-        if (response) {
-          setIsLoading(true);
-          const userObj = {
-            userName: response?.data.userName,
-            email: response?.data.email,
-          };
-          localStorage.setItem("user", JSON.stringify(userObj));
-          localStorage.setItem("token", response.data.token);
-          setUser(userObj);
-          setToken(response.data.token);
-          setIsLoading(false);
-          toast.success("login succes");
-          navigate("/search");
-        }
-      })
-      .catch((e) => toast.warning("Server error occured"));
+    try {
+      setIsLoading(true);
+      const response = await LoginAPI(userName, password);
+      if (response) {
+        console.log(isLoading);
+        const userObj = {
+          userName: response?.data.userName,
+          email: response?.data.email,
+        };
+        localStorage.setItem("user", JSON.stringify(userObj));
+        localStorage.setItem("token", response.data.token);
+        setUser(userObj);
+        setToken(response.data.token);
+        toast.success("login succes");
+        navigate("/search");
+      }
+    } catch {
+      toast.warning("Server error occured");
+    } finally {
+      setIsLoading(false);
+    }
   };
   const isLoggedIn = () => {
     return !!user;
@@ -118,6 +126,11 @@ export const UserProvider = ({ children }: Props) => {
     >
       {isLoggingOut && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/70 backdrop-blur-sm">
+          <Spinner />
+        </div>
+      )}
+      {isLoading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/20 backdrop-blur-[1px]">
           <Spinner />
         </div>
       )}

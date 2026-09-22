@@ -16,7 +16,7 @@ const validation = Yup.object().shape({
 });
 
 function LoginPage() {
-  const { loginUser, isLoading } = useAuth();
+  const { loginUser } = useAuth();
   const {
     register,
     handleSubmit,
@@ -24,8 +24,7 @@ function LoginPage() {
   } = useForm<LoginFormInputs>({ resolver: yupResolver(validation) });
 
   const handleLogin = (form: LoginFormInputs) => {
-    loginUser(form.userName, form.password);
-    console.log(isLoading);
+    return loginUser(form.userName, form.password);
   };
   return (
     <div>
@@ -40,7 +39,6 @@ function LoginPage() {
                 className="space-y-4 md:space-y-6"
                 onSubmit={handleSubmit(handleLogin)}
               >
-                {isLoading && <Spinner />}
                 <div>
                   <label
                     htmlFor="userName"
@@ -97,7 +95,7 @@ function LoginPage() {
                   type="submit"
                   className="w-full text-white cursor-pointer bg-[#20B2AA] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >
-                  Sign in
+                  Sign In
                 </button>
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                   Don’t have an account yet?{" "}

@@ -25,7 +25,7 @@ function RegisterPage() {
   } = useForm<RegisterInfo>({ resolver: yupResolver(validation) });
 
   const handleRegister = (props: RegisterInfo) => {
-    registeredUser(props.userName, props.password, props.email);
+    return registeredUser(props.userName, props.password, props.email);
   };
   return (
     <div>

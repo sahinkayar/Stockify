@@ -13,7 +13,6 @@ function SearchPage() {
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
-    console.log(e.target.value);
   };
   const onSearchSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
@@ -23,17 +22,14 @@ function SearchPage() {
       console.log(serverError);
     } else if (Array.isArray(result)) {
       setSearchResult(result);
-      console.log(result);
     }
   };
 
   const onPortfolioCreate = (e: any) => {
     e.preventDefault();
-    console.log(e.target[0]);
     const updatedPortfolio = [...portfolioValues, e.target[0].value];
     const exists = portfolioValues.find((value) => value === e.target[0].value);
     if (exists) return;
-
     setPortfolioValues(updatedPortfolio);
   };
 
@@ -61,6 +57,7 @@ function SearchPage() {
       <CardList
         searchResult={searchResult}
         onPortfolioCreate={onPortfolioCreate}
+        search={search}
       />
     </div>
   );
